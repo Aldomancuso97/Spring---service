@@ -1,15 +1,7 @@
-spring:
-  mail:
-    default-encoding: UTF-8
-    host: smtp.gmail.com
-    username: testdevelhope97@gmail.com
-    password: lonhthxhueqbjvju
-    port: 587
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable : true
-    protocol : smtp
-    test-connection : false
+---
+environment: test
+myCustomVarTree:
+  devName: aldo
+  spring:
+    port: 7070
+
