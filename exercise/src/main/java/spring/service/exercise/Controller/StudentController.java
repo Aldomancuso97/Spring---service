@@ -9,6 +9,7 @@ import spring.service.exercise.Entities.Student;
 import spring.service.exercise.Service.EmailService;
 import spring.service.exercise.Service.StudentService;
 
+import javax.mail.MessagingException;
 import java.util.Optional;
 
 @RestController
@@ -23,18 +24,22 @@ public class StudentController {
 
 
     @PostMapping("/send")
-    public ResponseEntity sendMailToStudent(@RequestBody NotificationDTO notificationDTO) {
-        Student studentWhoSendMail = studentService.GetStudentById(notificationDTO.getId());
-        if (studentWhoSendMail == null) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity sendMailToStudent(@RequestBody NotificationDTO notificationDTO) throws MessagingException {
+
+            Student studentWhoSendMail = studentService.GetStudentById(notificationDTO.getId());
+            if (studentWhoSendMail == null) {
+                ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
             emailService.sendTo(studentWhoSendMail.getEmail(), notificationDTO.getTitle(), notificationDTO.getText());
             return ResponseEntity.status(HttpStatus.OK).build();
-        }
 
 
 
     }
+
+
+
+}
 
 
 
